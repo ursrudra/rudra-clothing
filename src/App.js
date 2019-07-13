@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import HomePage from './pages/homepage/homepage.component';
 import {BrowserRouter as Router,Route,Switch} from 'react-router-dom';
+import ShopPage from './pages/shoppage/shoppage.component';
 
 
 function App() {
@@ -10,12 +11,11 @@ function App() {
       <Router>
         <Switch>
         <Route exact path="/" component={HomePage}/>
-        <Route path="/shop/hats" component={HatsPage}/>
+        <Route path="/shop" component={ShopPage}/>
         </Switch>
       </Router>
     </div>
   );
 }
 
-const HatsPage = () => <h1>HatsPage component</h1>;
 export default App;
