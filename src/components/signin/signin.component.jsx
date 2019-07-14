@@ -10,6 +10,7 @@ export default class Signin extends Component {
         this.state = {
             email: '',
             password: '',
+            error:'',
         }
     }
 
@@ -19,9 +20,10 @@ export default class Signin extends Component {
 
         try {
             await auth.signInWithEmailAndPassword(email,password);
-            this.setState({email:'',password:''});
+            this.setState({email:'',password:'',error:''});
         } catch (error) {
             console.log(error);
+            this.setState({error:error.message})
             
         }
 
@@ -56,6 +58,10 @@ export default class Signin extends Component {
                         <CustomButton type="submit">Sign In</CustomButton>
                         <CustomButton onClick={SigninWithGoogle} isGoogleSignIn>Sign In with Google</CustomButton>
                     </div>
+                    {
+                        this.state.error && <p>{this.state.error}</p>
+
+                    }
                 </form>
             </div>
 
