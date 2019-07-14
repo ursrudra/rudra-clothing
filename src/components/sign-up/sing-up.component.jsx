@@ -33,8 +33,9 @@ export default class SignUp extends Component {
 
       try {
           const { user } = await auth.createUserWithEmailAndPassword(email,password);
+          console.log("User",user);
+          await createUserProfileDocument({...user, displayName });
 
-          await createUserProfileDocument(user,displayName)
         //To clear form details
 
           this.setState({
