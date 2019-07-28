@@ -10,9 +10,11 @@ const firebaseConfig = {
     storageBucket: "fir-basics-7f215.appspot.com",
     messagingSenderId: "200451453036",
     appId: "1:200451453036:web:4c1f3488d6369548"
-  };
+};
 
- export const createUserProfileDocument = async (userAuth,...additionalData)=>{
+firebase.initializeApp(firebaseConfig);
+
+export const createUserProfileDocument = async (userAuth,...additionalData)=>{
       if(!userAuth) return;
       
       const userRef = firestore.doc(`user/${userAuth.uid}`)
@@ -71,7 +73,15 @@ const firebaseConfig = {
       },{});
   }
 
-  firebase.initializeApp(firebaseConfig);
+
+export const getCurrentUser =() =>{
+  return new Promise((resolve,reject)=>{
+      const unSubscribe = auth.onAuthStateChanged(userAuth =>{
+          unSubscribe();
+          resolve(userAuth);
+      },reject)
+  })
+}
 
   export const auth = firebase.auth();
   export const firestore = firebase.firestore();

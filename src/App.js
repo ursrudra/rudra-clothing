@@ -11,30 +11,15 @@ import { selectCurrentUser } from './redux/user/user.selectors';
 import { createStructuredSelector } from 'reselect';
 
 import { selectCollectionsForPreview } from './redux/shop/shop.selector';
-
+import { checkUserSession } from './redux/user/user.action';
 class App extends React.Component {
 
 
   unSubscribeFromAuth = null;
 
   componentDidMount(){
-
-  //   this.unSubscribeFromAuth = auth.onAuthStateChanged( async userAuth=>{
-  //   if(userAuth){
-  //     const userRef = await createUserProfileDocument(userAuth);
-      
-  //      userRef.onSnapshot(snapshot =>{
-  //        setCurrentUser({
-  //            id:snapshot.id,
-  //            ...snapshot.data()
-  //          });
-         
-  //      });
-       
-  //   }
-  //   setCurrentUser(userAuth);
-  // })
-
+        const { checkUserSession } = this.props;
+        checkUserSession();
   }  
 
   componentWillUnmount(){
@@ -61,4 +46,8 @@ const mapStateToProps = createStructuredSelector({
   currentUser:selectCurrentUser,
   collectionArray: selectCollectionsForPreview
 })
-export default connect(mapStateToProps)(App);
+
+const mapDispatchToProps = dispatch =>({
+  checkUserSession: ()=> dispatch(checkUserSession())
+})
+export default connect(mapStateToProps,mapDispatchToProps)(App);
