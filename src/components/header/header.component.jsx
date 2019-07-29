@@ -31,7 +31,7 @@ const Header = ({currentUser,hidden, signOutStart}) => {
                SIGN OUT 
               </OptionLink>
               <OptionLink as='div'>
-                {currentUser.displayName}
+                {currentUser.displayName || currentUser[0].displayName}
               </OptionLink>
               </>
               
